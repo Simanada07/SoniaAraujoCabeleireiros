@@ -1,0 +1,16 @@
+# Configuração de publicação no Netlify
+# O Netlify lê este ficheiro automaticamente: não é preciso escrever nada nas definições.
+
+[build]
+  command = "npm run build"   # constrói o site
+  publish = "dist"            # pasta com o site pronto
+
+[build.environment]
+  NODE_VERSION = "22"         # versão do Node usada no build (igual à deste computador)
+
+# Os ficheiros em /assets têm o nome com um código único, por isso podem
+# ficar em cache durante muito tempo (o site carrega mais depressa).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
