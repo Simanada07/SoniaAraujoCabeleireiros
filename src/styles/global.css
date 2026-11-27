@@ -1,0 +1,331 @@
+/* ==========================================================================
+   TOKENS DE DESIGN
+   As cores são substituídas ao carregar a partir de src/config/business.js —
+   os valores aqui são apenas de reserva.
+   ========================================================================== */
+:root {
+  /* Cor */
+  --color-bg: #faf5f0;
+  --color-surface: #ffffff;
+  --color-neutral: #f3e9e1;
+  --color-ink: #2b211d;
+  --color-ink-muted: #6b5d55;
+  --color-accent: #c0694a;
+  --color-accent-hover: #a9573a;
+  --color-accent-soft: #f7e6de;
+  --color-line: #e8dacf;
+  --color-on-accent: #ffffff;
+  --color-gold: #a9834a;
+
+  /* Tipografia */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif; /* títulos */
+  --font-brand: 'Cinzel', 'Trajan Pro', Georgia, serif; /* logótipo */
+  --font-ui: 'Jost', 'Futura', system-ui, sans-serif; /* menu, botões, etiquetas */
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --text-base: 18px;
+  --text-sm: 0.9rem;
+  --text-eyebrow: 0.8rem;
+  --text-h1: clamp(2.8rem, 5vw, 4.2rem);
+  --text-h2: clamp(2rem, 3.5vw, 2.8rem);
+  --text-h3: 1.4rem;
+  --leading-body: 1.65;
+  --leading-heading: 1.1;
+
+  /* Escala de espaçamento — usar só estes valores */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+
+  /* Layout */
+  --max-width: 1200px;
+  --gutter: clamp(16px, 4vw, 24px);
+  --section-y: var(--space-8);
+  --nav-height: 80px;
+
+  /* Profundidade */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --shadow-rest: 0 1px 2px rgba(42, 32, 35, 0.04), 0 8px 24px rgba(42, 32, 35, 0.06);
+  --shadow-hover: 0 2px 4px rgba(42, 32, 35, 0.05), 0 16px 40px rgba(42, 32, 35, 0.1);
+
+  /* Movimento */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-3d: cubic-bezier(0.16, 1, 0.3, 1); /* desaceleração suave para os movimentos 3D */
+  --duration: 200ms;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-y: var(--space-7);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --text-base: 16px;
+    /* No telemóvel o texto "pequeno" nunca desce abaixo de 16px */
+    --text-sm: 1rem;
+    --text-eyebrow: 0.85rem;
+    --section-y: var(--space-6);
+    --nav-height: 68px;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--text-base);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--leading-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: var(--leading-heading);
+  color: var(--color-ink);
+  font-variant-numeric: lining-nums;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: 1.2;
+}
+
+p {
+  margin: 0;
+  max-width: 65ch;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration) var(--ease);
+}
+
+/* As animações 3D começam ligeiramente fora do sítio (de lado / inclinadas).
+   Cortamos o que passa da largura do ecrã para o telemóvel nunca "encolher"
+   a página nem deixar arrastar para o lado. "clip" não estraga a barra fixa. */
+main {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol,
+dl {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+}
+
+/* ==========================================================================
+   AJUDAS DE LAYOUT
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: calc(var(--max-width) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  padding: var(--section-y) 0;
+  scroll-margin-top: var(--nav-height);
+}
+
+.section--neutral {
+  background: var(--color-neutral);
+}
+
+/* Pequena etiqueta por cima dos títulos */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Traço curto decorativo por baixo dos títulos */
+.rule {
+  display: block;
+  width: 48px;
+  height: 1.5px;
+  background: var(--color-accent);
+  opacity: 0.7;
+}
+
+.lead {
+  color: var(--color-ink-muted);
+}
+
+/* Link de texto com seta: "VER SERVIÇOS →" */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px; /* área de toque confortável */
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.text-link svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--duration) var(--ease);
+}
+
+.text-link:hover {
+  color: var(--color-accent-hover);
+}
+
+.text-link:hover svg {
+  transform: translateX(4px);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Todas as imagens ficam num contentor de proporção fixa */
+.media {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-neutral);
+}
+
+.media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   ANIMAÇÃO AO FAZER SCROLL — entrada com profundidade 3D
+   Os blocos sobem e "assentam" com uma ligeira inclinação para trás,
+   como uma página pousada numa mesa. Discreto de propósito.
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: perspective(1200px) translate3d(0, 32px, 0) rotateX(10deg);
+  transform-origin: 50% 0%;
+  transition:
+    opacity 800ms var(--ease),
+    transform 1000ms var(--ease-3d);
+  will-change: transform, opacity;
+}
+
+/* Entra pela esquerda, a rodar como uma porta */
+.reveal--left {
+  transform: perspective(1400px) translate3d(-40px, 0, 0) rotateY(12deg);
+  transform-origin: 0% 50%;
+}
+
+/* Entra pela direita */
+.reveal--right {
+  transform: perspective(1400px) translate3d(40px, 0, 0) rotateY(-12deg);
+  transform-origin: 100% 50%;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
+}

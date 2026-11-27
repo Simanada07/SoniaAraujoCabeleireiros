@@ -1,0 +1,123 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color var(--duration) var(--ease),
+    color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease),
+    transform var(--duration) var(--ease);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.md {
+  min-height: 54px;
+  padding: var(--space-3) var(--space-5);
+  font-size: 0.85rem;
+}
+
+.sm {
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.78rem;
+}
+
+.icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  transition: transform var(--duration) var(--ease);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.button:hover .icon {
+  transform: translateX(3px);
+}
+
+/* Cor de destaque cheia — ação principal */
+.primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: 0 8px 20px -10px color-mix(in srgb, var(--color-accent) 70%, transparent);
+}
+
+.primary:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-on-accent);
+  box-shadow: 0 14px 28px -12px color-mix(in srgb, var(--color-accent) 75%, transparent);
+}
+
+/* Contorno — ação secundária */
+.secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+
+.secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+/* Branco — sobre fundos de cor */
+.light {
+  background: var(--color-surface);
+  color: var(--color-accent);
+}
+
+.light:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+}
+
+/* Contorno branco — sobre fundos de cor */
+.outlineLight {
+  background: transparent;
+  color: var(--color-on-accent);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.outlineLight:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-on-accent);
+  color: var(--color-on-accent);
+}
+
+@media (max-width: 640px) {
+  .sm {
+    font-size: 0.85rem;
+  }
+}
+
+/* Ecrãs muito estreitos: o texto do botão pode partir em duas linhas
+   em vez de empurrar o cartão para fora do ecrã */
+@media (max-width: 400px) {
+  .button {
+    white-space: normal;
+    text-align: center;
+  }
+}

@@ -1,0 +1,233 @@
+/* Duas metades: texto à esquerda (alinhado com o resto do site)
+   e foto a sangrar até à margem direita */
+.hero {
+  --edge: max(var(--gutter), calc((100vw - var(--max-width)) / 2));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(90vh - var(--nav-height));
+  min-height: calc(90svh - var(--nav-height));
+  background: linear-gradient(90deg, var(--color-bg) 0%, var(--color-neutral) 100%);
+  scroll-margin-top: var(--nav-height);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-7) var(--space-8) var(--edge);
+  animation: rise 900ms var(--ease) both;
+}
+
+.title {
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  line-height: 1.05;
+}
+
+.title span {
+  display: block;
+}
+
+.accentLine {
+  color: var(--color-accent);
+  font-style: italic;
+}
+
+.text {
+  max-width: 42ch;
+  font-size: 1.05rem;
+  color: var(--color-ink-muted);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Linha de confiança: horário e telefone (informação real, sem avaliações inventadas) */
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-4);
+}
+
+.trustItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+a.trustItem:hover {
+  color: var(--color-accent);
+}
+
+.trustIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.trustIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Foto — entra como uma porta a abrir (rotação 3D a partir da margem direita) */
+.visual {
+  position: relative;
+  min-height: 520px;
+  perspective: 1800px;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  transform-origin: 100% 50%;
+  animation: doorOpen 1.4s var(--ease-3d) 150ms both;
+}
+
+.image img {
+  object-position: center 30%;
+  animation: settle 2s var(--ease) both;
+}
+
+/* Selo redondo */
+.badge {
+  position: absolute;
+  right: var(--space-6);
+  bottom: var(--space-6);
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  box-shadow: var(--shadow-hover);
+  transform-style: preserve-3d;
+  animation: badgeIn 1.2s var(--ease-3d) 900ms backwards;
+  transition: transform 900ms var(--ease-3d);
+}
+
+/* O selo dá uma volta em 3D ao passar o rato sobre a foto */
+.visual:hover .badge {
+  transform: perspective(600px) rotateY(360deg);
+}
+
+.badgeRing {
+  position: absolute;
+  inset: 6px;
+  width: calc(100% - 12px);
+  height: calc(100% - 12px);
+}
+
+.badgeText {
+  font-family: var(--font-ui);
+  font-size: 8.4px;
+  letter-spacing: 0.1em;
+  fill: currentColor;
+}
+
+.badgeLogo {
+  position: relative;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes doorOpen {
+  from {
+    opacity: 0;
+    transform: rotateY(-14deg) translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes badgeIn {
+  from {
+    opacity: 0;
+    transform: perspective(600px) rotateY(-90deg) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(600px) rotateY(0deg) scale(1);
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .copy {
+    padding: var(--space-7) var(--gutter) var(--space-6);
+  }
+
+  .visual {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .badge {
+    right: var(--space-4);
+    bottom: var(--space-4);
+  }
+}
+
+@media (max-width: 560px) {
+  .copy {
+    padding-top: var(--space-6);
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .visual {
+    aspect-ratio: 4 / 5;
+  }
+
+  .badge {
+    width: 104px;
+    height: 104px;
+  }
+
+  .badgeText {
+    font-size: 8px;
+  }
+}

@@ -1,0 +1,117 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-rest);
+  /* 3D: o cartão inclina-se segundo --rx/--ry (definidos por useTilt) */
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift: 0px;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translate3d(0, var(--lift), 0);
+  transform-style: preserve-3d;
+  transition:
+    transform 450ms var(--ease-3d),
+    box-shadow var(--duration) var(--ease),
+    border-color var(--duration) var(--ease);
+}
+
+.card:hover {
+  --lift: -6px;
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-accent-soft);
+}
+
+/* Foto com o topo em arco — "flutua" ligeiramente à frente do cartão */
+.arch {
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px var(--radius-sm) var(--radius-sm);
+  transform: translateZ(0);
+  transition:
+    transform 450ms var(--ease-3d),
+    box-shadow 450ms var(--ease-3d);
+}
+
+.card:hover .arch {
+  transform: translateZ(28px);
+  box-shadow: 0 18px 30px -18px rgba(43, 33, 29, 0.45);
+}
+
+/* Ligeiro tom quente por cima da foto ao passar o rato */
+.arch::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, color-mix(in srgb, var(--color-accent) 22%, transparent));
+  opacity: 0;
+  transition: opacity 300ms var(--ease);
+}
+
+.card:hover .arch::after {
+  opacity: 1;
+}
+
+.arch img {
+  transition: transform 600ms var(--ease);
+}
+
+.card:hover .arch img {
+  transform: scale(1.05);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-2) 0;
+  transform: translateZ(0);
+  transition: transform 450ms var(--ease-3d);
+}
+
+.card:hover .body {
+  transform: translateZ(14px);
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.text {
+  flex: 1;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}
+
+/* Link no fundo do cartão, separado por uma linha fina */
+.link {
+  display: flex;
+  min-height: 52px;
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-line);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 640px) {
+  .text {
+    font-size: 1rem;
+  }
+
+  .link {
+    font-size: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .card:hover .arch,
+  .card:hover .body {
+    transform: none;
+  }
+}
