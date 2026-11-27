@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import business from '../config/business'
-import { directionsLink, emailLink, phoneLink, whatsappLink } from '../utils/links'
+import { directionsLink, emailLink, instagramLink, instagramName, phoneLink, whatsappLink } from '../utils/links'
 import Button from './ui/Button'
-import { ClockIcon, MailIcon, PhoneIcon, PinIcon, WhatsappIcon } from './ui/Icons'
+import { ClockIcon, InstagramIcon, MailIcon, PhoneIcon, PinIcon, WhatsappIcon } from './ui/Icons'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 import useTilt from './ui/useTilt'
@@ -67,6 +67,13 @@ export default function Contact() {
       external: true,
     },
     emailLink && { Icon: MailIcon, label: c.emailLabel, value: contact.email, href: emailLink },
+    instagramLink && {
+      Icon: InstagramIcon,
+      label: c.instagramLabel,
+      value: instagramName,
+      href: instagramLink,
+      external: true,
+    },
   ].filter(Boolean)
 
   return (

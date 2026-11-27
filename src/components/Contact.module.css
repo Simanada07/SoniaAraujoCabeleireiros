@@ -143,7 +143,9 @@
 .channelText {
   display: flex;
   flex-direction: column;
+  min-width: 0;
   line-height: 1.3;
+  overflow-wrap: anywhere; /* nomes longos (ex.: @ do Instagram) partem de linha em vez de sair do cartão */
 }
 
 .channelLabel {

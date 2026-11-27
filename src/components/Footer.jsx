@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import business from '../config/business'
-import { directionsLink, emailLink, phoneLink, whatsappLink } from '../utils/links'
+import { directionsLink, emailLink, instagramLink, instagramName, phoneLink, whatsappLink } from '../utils/links'
 import Brand from './ui/Brand'
-import { MailIcon, PhoneIcon, PinIcon, WhatsappIcon } from './ui/Icons'
+import { InstagramIcon, MailIcon, PhoneIcon, PinIcon, WhatsappIcon } from './ui/Icons'
 import styles from './Footer.module.css'
 
 export default function Footer() {
@@ -56,6 +56,13 @@ export default function Footer() {
               <li>
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
                   <WhatsappIcon /> {contactSection.whatsappLabel}
+                </a>
+              </li>
+            )}
+            {instagramLink && (
+              <li>
+                <a href={instagramLink} target="_blank" rel="noopener noreferrer" className={styles.iconLink}>
+                  <InstagramIcon /> {instagramName}
                 </a>
               </li>
             )}

@@ -12,6 +12,16 @@ export const whatsappLink = contact.whatsapp
 
 export const emailLink = contact.email ? `mailto:${contact.email}` : null
 
+// Aceita 'conta', '@conta' ou o link completo do Instagram
+const instagramHandle = (contact.instagram || '')
+  .trim()
+  .replace(/^https?:\/\/(www\.)?instagram\.com\//i, '')
+  .replace(/^@/, '')
+  .replace(/[/?#].*$/, '')
+
+export const instagramName = instagramHandle ? `@${instagramHandle}` : null
+export const instagramLink = instagramHandle ? `https://www.instagram.com/${instagramHandle}/` : null
+
 export const directionsLink =
   contact.mapsUrl ||
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(

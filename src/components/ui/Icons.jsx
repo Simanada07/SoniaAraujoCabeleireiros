@@ -77,3 +77,11 @@ export const WhatsappIcon = () => (
     <path d="M9.2 8.6c.2-.4.4-.4.7-.4h.4c.2 0 .3.1.4.3l.6 1.4c0 .2 0 .3-.1.5l-.4.5c-.1.1-.1.3 0 .4a5.7 5.7 0 0 0 2.6 2.3c.2.1.3 0 .4-.1l.5-.6c.1-.2.3-.2.5-.1l1.4.7c.2.1.3.2.3.4 0 .5-.2 1.1-.7 1.4-.6.4-1.5.5-2.6.1a8.3 8.3 0 0 1-3.9-3.5c-.6-1-.7-2-.2-2.7z" />
   </svg>
 )
+
+export const InstagramIcon = () => (
+  <svg {...base}>
+    <rect x="3" y="3" width="18" height="18" rx="5" />
+    <circle cx="12" cy="12" r="4" />
+    <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+  </svg>
+)

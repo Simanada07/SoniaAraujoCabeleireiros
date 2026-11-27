@@ -50,6 +50,9 @@ const business = {
     whatsapp: '351919919390', // número com indicativo; deixe vazio ('') para esconder o WhatsApp
     whatsappDisplay: '919 919 390',
     email: '', // ex.: 'geral@exemplo.pt' — deixe vazio para esconder o email
+    // Instagram do salão: escreva só o nome da conta, sem @ (ex.: 'soniaaraujocabeleireiros').
+    // Enquanto estiver vazio, os links do Instagram ficam escondidos.
+    instagram: 'soniaaraujocabeleireiros',
     addressLine1: 'Rua Manuel Ferreira Loureiro, Loja 16',
     addressLine2: '4760-248 Brufe, Portugal',
     mapsUrl:
@@ -194,6 +197,7 @@ const business = {
     callLabel: 'Ligar',
     whatsappLabel: 'WhatsApp',
     emailLabel: 'Email',
+    instagramLabel: 'Instagram',
     // Detalhes
     eyebrow: 'Contactos',
     title: 'Visite-nos em Brufe',
